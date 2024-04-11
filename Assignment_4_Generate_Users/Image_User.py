@@ -1,9 +1,9 @@
 import time
 from selenium import webdriver
-from selenium import By
+from selenium.webdriver.common.by import By
 
 def countElem(driver, tag_name)->int:
-    return len(driver.find_Elements(By.TAG_NAME, tag_name))
+    return len(driver.find_elements(By.TAG_NAME, tag_name))
 
 def main():
     # Initialize browser
@@ -14,7 +14,7 @@ def main():
 
     reward_time = 10
     total_reward_time = 0
-    tag = ["img"]
+    tags = ["img"]
     for tag in tags:
         num_images = countElem(driver, tag)
         total_reward_time += reward_time * num_images

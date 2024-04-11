@@ -1,24 +1,24 @@
 import time
 from selenium import webdriver
-from selenium import By
+from selenium.webdriver.common.by import By
 
 def findKeyword(driver, keyword):
-    if keyword.lower() in driver.page_source():
+    if keyword.lower() in driver.page_source.lower():
         return True
     else:
         return False
 
-def countElem(driver, tag_name)->int:
+def countTagElem(driver, tag_name)->int:
     count = 0
     for tags in tag_name:
-        count += len(driver.find_Elements(By.TAG_NAME, tag_name))
+        count += len(driver.find_elements(By.TAG_NAME, tags))
     return count
 
 def userAction(action, driver, reward_time, req_list)->float:
     total_reward_time = 0
     if action.upper() == "KEYWORD":
         for keyword in req_list:
-            if findText(driver, keyword):
+            if findKeyword(driver, keyword):
                 print("found", keyword)
                 time.sleep(reward_time)
                 total_reward_time += reward_time
@@ -29,15 +29,17 @@ def userAction(action, driver, reward_time, req_list)->float:
         total_reward_time = reward_time * num_images
         time.sleep(total_reward_time)
 
-    return total_rewards_time
+    return total_reward_time
 
 # Function to click link
-def clickLink(driver, href):
-    # find all anchor elements on the page
-    links = driver.find_elements(By.TAG_NAME, "a")
-
-    for links in links:
-        link.click()
+def clickLink(driver):
+    count = 0
+    links = driver.find_elements(By.TAG_NAME, "g")
+    if links:
+        for link in links:
+            count += 1
+            link.click()
+    return count
 
 
 def main():
@@ -49,13 +51,23 @@ def main():
 
     reward_time = 10
     
-    total_reward_time = userAction("KEYWORD", driver, reward_time, ["student", "test"])
+    total_reward_time = 0
 
-    tag_name = "img"
-    total_reward_time += userAction("IMAGE", driver, reward_time, [tag_name])
-    clickLink(driver)
+    keywords = ["CSUSB"]
+    
+    tags = ["img"]
 
+    total_reward_time += userAction("KEYWORD", driver, reward_time, keywords)
+
+    total_reward_time += userAction("IMAGE", driver, reward_time, tags)
+    
+    if clickLink(driver) > 0:
+        clickLink(driver)
+        total_reward_time += reward_time
+        time.sleep(reward_time)
+        time.sleep(reward_time)
     driver.quit()
+
     print("Presence Time:", total_reward_time)
 
 if __name__ == "__main__":

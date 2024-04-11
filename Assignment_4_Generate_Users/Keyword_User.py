@@ -2,8 +2,8 @@ import time
 from selenium import webdriver
 
 def findKeyword(driver, keyword)->bool:
-    print(driver.page_source)
-    return keyword.lower() in driver.page_source
+    return keyword in driver.page_source
+    
 
 def main():
     # Initialize browser
@@ -14,10 +14,11 @@ def main():
 
     reward_time = 10
     total_reward_time = 0
-    keyword = "student"
-    if findKeyword(driver, keyword):
-        total_reward_time += reward_time
-        
+    keywords = ["CSUSB", "student"]
+    for key in keywords:
+        if findKeyword(driver, key):
+            total_reward_time += reward_time
+            time.sleep(reward_time)   
     driver.quit()
     print("Presence Time:", total_reward_time)
 

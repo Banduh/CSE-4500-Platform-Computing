@@ -1,4 +1,4 @@
-import time
+# import time
 from selenium import webdriver
 import collections
 import pymysql
