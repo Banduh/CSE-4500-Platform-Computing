@@ -42,12 +42,12 @@ def clickLink(driver):
     return count
 
 
-def main():
+def userAction(driver):
     # Initialize browser
-    driver = webdriver.Chrome()
+    #driver = webdriver.Chrome()
 
     # Navigate to your website
-    driver.get("http://localhost:3000/")
+    #driver.get("http://localhost:3000/")
 
     reward_time = 10
     

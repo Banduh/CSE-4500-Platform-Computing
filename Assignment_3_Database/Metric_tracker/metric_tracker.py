@@ -39,7 +39,7 @@ print(metrics)
 conn = pymysql.connect(
     host = "127.0.0.1",
     user = "root",
-    password = "BTPandas1591!",
+    password = "1234",
     db = "metrics"
     charset = 'utf8mb4'
     cursorclass=pymysql.cursors.Dictcursor
